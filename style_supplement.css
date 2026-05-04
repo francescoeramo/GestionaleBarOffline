@@ -1,0 +1,209 @@
+/* Supplement CSS — copiato da GestionaleBar */
+
+/* ── Mobile sidebar ───────────────────────────────────────── */
+#menu-toggle {
+  display: none;
+  position: fixed;
+  top: 12px; left: 12px;
+  z-index: 300;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+#sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(0,0,0,.5);
+}
+
+@media (max-width: 768px) {
+  #menu-toggle { display: flex; }
+  #sidebar {
+    transform: translateX(-100%);
+    transition: transform var(--transition);
+    z-index: 200;
+  }
+  #sidebar.open {
+    transform: translateX(0);
+  }
+  #sidebar.open ~ #sidebar-backdrop,
+  body:has(#sidebar.open) #sidebar-backdrop {
+    display: block;
+  }
+  #main {
+    margin-left: 0;
+    width: 100%;
+  }
+  #view-container {
+    padding: 16px;
+    padding-top: 56px;
+  }
+  .pos-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .tables-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
+
+/* ── Loading spinner ──────────────────────────────────────── */
+.loading-spinner {
+  width: 32px; height: 32px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  margin: 80px auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Error state ──────────────────────────────────────────── */
+.error-state {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--color-error);
+}
+.error-state pre {
+  margin-top: 12px;
+  font-size: var(--text-xs);
+  background: var(--color-surface-2);
+  padding: 12px;
+  border-radius: var(--radius-md);
+  text-align: left;
+  overflow-x: auto;
+}
+
+/* ── KPI cards ────────────────────────────────────────────── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.kpi-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  text-align: center;
+}
+.kpi-value {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.kpi-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* ── Storico ──────────────────────────────────────────────── */
+.storico-filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+}
+.storico-filters .field-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+}
+
+/* ── Fornitori ────────────────────────────────────────────── */
+.supplier-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.supplier-name { font-weight: 600; font-size: var(--text-sm); }
+.supplier-meta { font-size: var(--text-xs); color: var(--color-text-muted); margin-top: 2px; }
+
+/* ── Magazzino ────────────────────────────────────────────── */
+.stock-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  margin-bottom: 4px;
+  transition: background var(--transition);
+}
+.stock-row:hover { background: var(--color-surface-2); }
+.stock-name { flex: 1; font-size: var(--text-sm); font-weight: 500; }
+.stock-qty {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  min-width: 60px;
+  text-align: right;
+}
+.stock-status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Ingredienti ──────────────────────────────────────────── */
+.ingredient-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.ingredient-row:last-child { border-bottom: none; }
+
+/* ── Menu ricette ─────────────────────────────────────────── */
+.recipe-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-surface-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 3px 10px;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin: 2px;
+}
+.recipe-tag button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-error);
+  padding: 0;
+  line-height: 1;
+  font-size: 12px;
+}
+
+/* ── Backup export button ─────────────────────────────────── */
+.btn-export {
+  background: var(--color-info-dim);
+  color: var(--color-info);
+  border: 1px solid transparent;
+}
+.btn-export:hover {
+  background: var(--color-info);
+  color: #fff;
+}
